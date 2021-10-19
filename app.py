@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import jsonify
+from flask import request, jsonify
 
 
 app = Flask(__name__)
@@ -54,6 +54,22 @@ def changeroute(dollar, cents):
     amount = f"{dollar}.{cents}"
     result = change(float(amount))
     return jsonify(result)
+
+
+@app.route("/change-json", methods=["POST"])
+def changejsonroute():
+    res = []
+    content = request.args.to_dict(flat=False)
+    key = next(iter(content))
+
+    if key == "amount":
+        for amount in content.get(key):
+            print(f"Make Change for {amount} using POST")
+            result = change(float(amount))
+            res.append(result)
+        return jsonify(res)
+
+    return "Error! Value accepted: {'amount': <value>}"
 
 
 @app.route("/multiply/<dollar>/<cents>")
