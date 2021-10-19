@@ -13,10 +13,15 @@ Small Flask Microservice that makes change. It is a project part of the second c
 
 Three methods are available:
 1. **Change** (GET method): Provides the change based on the amount the person has;
+
 ```localhost:5000/change/<dollar>/<cents>```
+
 2. **Change** (POST method): Provides the change for one or several different amounts;
+
 ```localhost:5000/change-json?amount=<amount>&amount=<amount2>```
+
 3. **Multiply** (GET method): Multiply the amount of the change by a 100.
+
 ```localhost:5000/multiply/<dollar>/<cents>```
 
 ### Postman
